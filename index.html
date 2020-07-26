@@ -2,6 +2,26 @@
 <script src='https://d3js.org/d3.v5.min.js'></script>
     <body>
         <h1>Narrative Visualization Project</h1>
-        <svg width=200 height=300></svg>
+        <svg width=300 height=300></svg>
+        <script>
+            async function init() {
+                const data = await d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/API_SP.DYN.TFRT.IN_DS2_en_csv_v2_1218002.csv');
+
+                margin = 50
+                width = 200
+                height = 200
+
+                var x = d3.scaleBand().domain([10,150]).range([0, width]);
+                var y = d3.scaleLinear().domain([10,150]). range([height, 0]);
+
+                var g = d3.select("svg").append("g")
+                g.attr("transform", "translate("+ margin +","+ margin +")")
+
+                
+
+
+    
+            }
+        </script>
     </body>
 </html>
