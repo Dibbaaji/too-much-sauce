@@ -12,9 +12,9 @@
             async function init() {
                 const data = await d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/API_SP.DYN.TFRT.IN_DS2_en_csv_v2_1218002.csv');
 
-                margin = 50
-                width = 200
-                height = 200
+                var margin = {top: 50, right: 30, bottom: 30, left: 100},
+                    width = 600 - margin.left - margin.rigth,
+                    height = 400 - margin.top - margin.bottom;
 
                 var x = d3.scaleBand().domain([10,150]).range([0, width]);
                 var y = d3.scaleLinear().domain([10,150]). range([height, 0]);
