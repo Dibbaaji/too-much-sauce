@@ -19,8 +19,9 @@
                 var x = d3.scaleBand().domain([10,150]).range([0, width]);
                 var y = d3.scaleLinear().domain([10,150]). range([height, 0]);
 
-                var g = d3.select("svg").append("g")
-                g.attr("transform", "translate("+ margin +","+ margin +")")
+                var svg = d3.select("#line")
+                    .append("svg")
+                    .attr("transform", "translate("+ margin +","+ margin +")")
 
                 
 
