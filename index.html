@@ -16,7 +16,7 @@
                     width = 600 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
 
-                var x = d3.scaleBand().domain([10,150]).range([0, width]);
+                var x = d3.scaleTime().domain([10,150]).range([0, width]);
                 var y = d3.scaleLinear().domain([10,150]). range([height, 0]);
 
                 var svg = d3.select("#line")
