@@ -22,10 +22,10 @@
                     .append("g")
                         .attr("transform", "translate("+ margin.left +","+ margin.top +")");
 
-                d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/FertilityRate_perBirth.csv',
+                d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/fertilityValues.csv',
                 
                 //format the read file
-                    function(d){ return { data : d.year, value : d.fertilityratevalue}}
+                    function(d){ return { data : d.year, value : d.fertilityValues}}
                 );
 
                 
