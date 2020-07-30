@@ -4,27 +4,39 @@
         <meta charset="utf-8">
         <script src='https://d3js.org/d3.v5.min.js'></script>  
     </head>
-    <body>
+    <body onload='init()'>
         <h1>Narrative Visualization Project</h1>
         <div id='line'></div>
         <svg width=300 height=300></svg>
         <script>
             async function init() {
-                const data = await d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/FertilityRate_perBirth.csv');
 
                 var margin = {top: 50, right: 30, bottom: 30, left: 100},
                     width = 600 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
-
-                var x = d3.scaleTime().domain([10,150]).range([0, width]);
-                var y = d3.scaleLinear().domain([10,150]). range([height, 0]);
 
                 var svg = d3.select("#line")
                     .append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
-                        .attr("transform", "translate("+ margin.left +","+ margin.top +")")
+                        .attr("transform", "translate("+ margin.left +","+ margin.top +")");
+
+                d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/FertilityRate_perBirth.csv',
+                
+                //format the read file
+                    function(d){ return { data : d.year, value : d.fertilityratevalue}}
+                );
+
+                
+
+                var x = d3.scaleTime().domain([10,150]).range([0, width]);
+                var y = d3.scaleLinear().domain([10,150]). range([height, 0]);
+
+                
+                
+
+                
 
                 
 
