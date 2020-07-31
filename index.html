@@ -42,17 +42,34 @@
                             .call(d3.axisLeft(y));
 
                         // text label for the y axis
+                        svg.append("text")
+                            .attr("transform", "rotate(-90)")
+                            .attr("y", 0 - margin.left)
+                            .attr("x", 0 - (height / 2))
+                            .attr("dy", "lem") // dy indicates a shift along the y axis
+                            .attr("font-size", "12px")
+                            .style("text-anchor", "middle")
+                            .text("Fertility Rate (per 1000 birth");
+
+                        // title
+                        svg.append("text")
+                            .attr("y", 0 - margin.top)
+                            .attr("x", (width / 2))
+                            .attr("dy", "lem")
+                            .attr("font-size", "16px")
+                            .style("text-anchor", "middle")
+                            .text("Fertlity rate of a Country")
                 
 
-                        svg.append("path")
-                            data(data)
-                            .attr("fill", "none")
-                            .attr("stroke", "steelblue")
-                            .attr("stroke-width", 1.5)
-                            .attr("d", d3.line()
-                                .x(function(d) { return x(d.date) })
-                                .y(function(d) { return y(d.value) })   
-                            )
+                        // svg.append("path")
+                        //     data(data)
+                        //     .attr("fill", "none")
+                        //     .attr("stroke", "steelblue")
+                        //     .attr("stroke-width", 1.5)
+                        //     .attr("d", d3.line()
+                        //         .x(function(d) { return x(d.date) })
+                        //         .y(function(d) { return y(d.value) })   
+                        //     )
                             
                     })
         </script>
