@@ -44,8 +44,8 @@
                         // text label for the y axis
                         svg.append("text")
                             .attr("transform", "rotate(-90)")
-                            .attr("y", 0 - margin.left)
-                            .attr("x", 0 - (height / 2))
+                            .attr("y", margin.left)
+                            .attr("x", (height / 2))
                             .attr("dy", "lem") // dy indicates a shift along the y axis
                             .attr("font-size", "12px")
                             .style("text-anchor", "middle")
@@ -53,7 +53,7 @@
 
                         // title
                         svg.append("text")
-                            .attr("y", 0 - margin.top)
+                            .attr("y", margin.top)
                             .attr("x", (width / 2))
                             .attr("dy", "lem")
                             .attr("font-size", "16px")
