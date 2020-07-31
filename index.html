@@ -16,22 +16,22 @@
 
                 var svg = d3.select("#line")
                     .append("svg")
-                    .attr("width", width + margin.left + margin.right)
-                    .attr("height", height + margin.top + margin.bottom)
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                         .attr("transform", "translate("+ margin.left +","+ margin.top +")");
 
                 d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityValues.csv',
                 
                 //format the read file
-                    function(d) { return { data : d.year, value : d.Fertility_values}},
+                    function(d) { return { date : d.year, value : d.Fertility_values}},
                     function(data) {
                         // add x and y axis
                         var x = d3.scaleTime()
                                 .domain(d3.extent(data, function(d) {return d.date; }))
                                 .range([0, width]);
                         var y = d3.scaleLinear()
-                                .domain([0, d3.max(data, function(d) {retutn +d.value; })])
+                                .domain([0, d3.max(data, function(d) {return +d.value; })])
                                 .range([height, 0]);
 
                         svg.append("g")
@@ -41,8 +41,11 @@
                         svg.append("g")
                             .call(d3.axisLeft(y));
 
+                        // text label for the y axis
+                
+
                         svg.append("path")
-                            datum(data)
+                            data(data)
                             .attr("fill", "none")
                             .attr("stroke", "steelblue")
                             .attr("stroke-width", 1.5)
