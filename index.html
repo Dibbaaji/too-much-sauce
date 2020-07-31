@@ -4,12 +4,11 @@
         <meta charset="utf-8">
         <script src='https://d3js.org/d3.v5.min.js'></script>  
     </head>
-    <body onload='init()'>
+    <body>
         <h1>Narrative Visualization Project</h1>
         <div id='line'></div>
         <svg width=300 height=300></svg>
         <script>
-            async function init() {
 
                 var margin = {top: 50, right: 30, bottom: 30, left: 100},
                     width = 600 - margin.left - margin.right,
@@ -52,7 +51,7 @@
                                 .y(function(d) { return y(d.value) })   
                             )
                             
-                    })}
+                    })
         </script>
     </body>
 </html>
