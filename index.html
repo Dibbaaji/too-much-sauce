@@ -22,7 +22,7 @@
                     .append("g")
                         .attr("transform", "translate("+ margin.left +","+ margin.top +")");
 
-                d3.csv('https://github.com/Dibbaaji/too-much-sauce/blob/master/fertilityValues.csv',
+                d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityValues.csv',
                 
                 //format the read file
                     function(d) { return { data : d.year, value : d.Fertility_values}},
