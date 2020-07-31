@@ -6,40 +6,52 @@
     </head>
     <body>
         <h1>Narrative Visualization Project</h1>
-        <div id='line'></div>
-        <svg width=300 height=300></svg>
+        <! create a div where the graph will be located
+        <div id='my_dataviz'></div>
         <script>
-
-                var margin = {top: 50, right: 30, bottom: 30, left: 100},
-                    width = 600 - margin.left - margin.right,
+                // set the dimension and margins of the graph
+                var margin = {top:10, right: 30, bottom: 30, left: 60},
+                    width = 460 - margin.left - margin.right,
                     height = 400 - margin.top - margin.bottom;
-
-                var svg = d3.select("#line")
+                // append the svg object ot the body 
+                var svg = d3.select("#my_dataviz")
                     .append("svg")
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                         .attr("transform", "translate("+ margin.left +","+ margin.top +")");
-
+                // Read the data
                 d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityValues.csv',
                 
-                //format the read file
-                    function(d) { return { date : d.year, value : d.Fertility_values}},
+                    //format the read file
+                    function(d) { 
+                        return { date : d.Year, value : d.Fertility_values}},
+                    // use the dataset
                     function(data) {
                         // add x and y axis
                         var x = d3.scaleTime()
                                 .domain(d3.extent(data, function(d) {return d.date; }))
                                 .range([0, width]);
+                        svg.append("g")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(d3.axisBottom(x));
+
                         var y = d3.scaleLinear()
                                 .domain([0, d3.max(data, function(d) {return +d.value; })])
                                 .range([height, 0]);
+                        svg.append("g")
+                            .call(d3.axisLeft(y));
 
-                        // svg.append("g")
-                        //     .attr("transform", "translate(0," + height + ")")
-                        //     .call(d3.axisBottom(x));
-
-                        // svg.append("g")
-                        //     .call(d3.axisLeft(y));
+                        // Add the line
+                        svg.append("path")
+                            data([data])
+                            .attr("fill", "none")
+                            .attr("stroke", "steelblue")
+                            .attr("stroke-width", 1.5)
+                            .attr("d", d3.line()
+                                .x(function(d) { return x(d.date) })
+                                .y(function(d) { return y(d.value) })   
+                            )
 
                         // // text label for the y axis
                         // svg.append("text")
@@ -61,27 +73,6 @@
                         //     .text("Fertlity rate of a Country")
 
 
-                        d3.select('svg')
-                            .append('g')
-                            .attr("transform", "translate("+ margin +","+ margin +")")
-                            .call(d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
-            
-                        d3.select('svg')
-                            .append('g')
-                            .attr("transform", "translate("+ margin +","+(height + margin)+")")
-                            .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
-            
-                
-
-                        // svg.append("path")
-                        //     data(data)
-                        //     .attr("fill", "none")
-                        //     .attr("stroke", "steelblue")
-                        //     .attr("stroke-width", 1.5)
-                        //     .attr("d", d3.line()
-                        //         .x(function(d) { return x(d.date) })
-                        //         .y(function(d) { return y(d.value) })   
-                        //     )
                             
                     })
         </script>
