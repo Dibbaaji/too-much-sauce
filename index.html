@@ -34,31 +34,43 @@
                                 .domain([0, d3.max(data, function(d) {return +d.value; })])
                                 .range([height, 0]);
 
-                        svg.append("g")
-                            .attr("transform", "translate(0," + height + ")")
-                            .call(d3.axisBottom(x));
+                        // svg.append("g")
+                        //     .attr("transform", "translate(0," + height + ")")
+                        //     .call(d3.axisBottom(x));
 
-                        svg.append("g")
-                            .call(d3.axisLeft(y));
+                        // svg.append("g")
+                        //     .call(d3.axisLeft(y));
 
-                        // text label for the y axis
-                        svg.append("text")
-                            .attr("transform", "rotate(-90)")
-                            .attr("y", margin.left)
-                            .attr("x", (height / 2))
-                            .attr("dy", "lem") // dy indicates a shift along the y axis
-                            .attr("font-size", "12px")
-                            .style("text-anchor", "middle")
-                            .text("Fertility Rate (per 1000 birth");
+                        // // text label for the y axis
+                        // svg.append("text")
+                        //     .attr("transform", "rotate(-90)")
+                        //     .attr("y", margin.left)
+                        //     .attr("x", (height / 2))
+                        //     .attr("dy", "lem") // dy indicates a shift along the y axis
+                        //     .attr("font-size", "12px")
+                        //     .style("text-anchor", "middle")
+                        //     .text("Fertility Rate (per 1000 birth");
 
-                        // title
-                        svg.append("text")
-                            .attr("y", margin.top)
-                            .attr("x", (width / 2))
-                            .attr("dy", "lem")
-                            .attr("font-size", "16px")
-                            .style("text-anchor", "middle")
-                            .text("Fertlity rate of a Country")
+                        // // title
+                        // svg.append("text")
+                        //     .attr("y", margin.top)
+                        //     .attr("x", (width / 2))
+                        //     .attr("dy", "lem")
+                        //     .attr("font-size", "16px")
+                        //     .style("text-anchor", "middle")
+                        //     .text("Fertlity rate of a Country")
+
+
+                        d3.select('svg')
+                            .append('g')
+                            .attr("transform", "translate("+ margin +","+ margin +")")
+                            .call(d3.axisLeft(y).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
+            
+                        d3.select('svg')
+                            .append('g')
+                            .attr("transform", "translate("+ margin +","+(height + margin)+")")
+                            .call(d3.axisBottom(x).tickValues([10,20,50,100]).tickFormat(d3.format("~s")));
+            
                 
 
                         // svg.append("path")
