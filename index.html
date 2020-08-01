@@ -110,8 +110,9 @@
                             .attr("d", d3.line())
                                 .x(function(d) { return x(+d.date)}
                                 .y(function(d) { return y(+d.value)})
+                                )
                             .attr("stroke", function(d) { return myColor(selectedGroup) })
-                }
+                    }
 
                     // when button changes, run the updateChart function
                     d3.select("#selectButton").on("change", function(d) {
@@ -122,7 +123,7 @@
                     })
                         
                             
-                })
+                })   
         </script>
     </body>
 </html>
