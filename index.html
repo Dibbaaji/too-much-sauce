@@ -27,12 +27,12 @@
                     .attr("transform", "translate("+ margin.left +","+ margin.top +")");
             
             // Read the data
-            d3.csv('https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/5_OneCatSevNumOrdered.csv',
+            d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityRate.csv',
             
                 // use the dataset
                 function(data) {
                     //list of groups for country
-                    var countryList = d3.map(data, function(d){return (d.name)}).keys()
+                    var countryList = d3.map(data, function(d){return (d.countryName)}).keys()
                     console.log(countryList)
 
                     // // option to add a button
