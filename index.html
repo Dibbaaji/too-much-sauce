@@ -87,7 +87,7 @@
                     var line = svg
                         .append("g")
                         .append("path")
-                        .datum(data.filter(function(d) { return d.countryName==countryList[0]}))
+                        .datum(data.filter(function(d) { return d.countryName=="World"}))
                             .attr("fill", "none")
                             .attr("stroke", function(d) {return myColor("valueA") })
                             .attr("stroke-width", 4)
