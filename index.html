@@ -32,42 +32,36 @@
                 function(data) {
                     //list of groups for country
                     var allGroup = d3.map(data, function(d){return (d.CountryName)}).keys()
-                    console.log(allGroup)
-                    
-
-                   
-                    
-                
 
                     // // option to add a button
-                    // d3.select("#selectButton")
-                    //     .selectAll("myOptions")
-                    //     .data(countryList)
-                    //     .enter()
-                    //         .append("option")
-                    //     .text(function (d) { return d; }) // text shown in the menu
-                    //     .attr("value", function (d) { return d; }) // corresponding value return by the button
+                    d3.select("#selectButton")
+                        .selectAll("myOptions")
+                        .data(allGroup)
+                        .enter()
+                            .append("option")
+                        .text(function (d) { return d; }) // text shown in the menu
+                        .attr("value", function (d) { return d; }) // corresponding value return by the button
 
                     // // A color scale
-                    // var myColor = d3.scaleOrdinal()
-                    //     .domain(countryList)
-                    //     .range(d3.schemeSet2);
+                    var myColor = d3.scaleOrdinal()
+                        .domain(allGroup)
+                        .range(d3.schemeSet2);
 
                     // // add x and y axis
-                    // var x = d3.scaleTime()
-                    //         .domain(d3.extent(data, function(d) {return d.date; }))
-                    //         .range([0, width]);
-                    // svg.append("g")
-                    //     .attr("class", "xaxis")
-                    //     .attr("transform", "translate(0," + height + ")")
-                    //     .call(d3.axisBottom(x));
+                    var x = d3.scaleTime()
+                            .domain(d3.extent(data, function(d) {return d.year; }))
+                            .range([0, width]);
+                    svg.append("g")
+                        .attr("class", "xaxis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(d3.axisBottom(x));
 
-                    // var y = d3.scaleLinear()
-                    //         .domain([0, d3.max(data, function(d) {return +d.Fertility_values; })])
-                    //         .range([height, 0]);
-                    // svg.append("g")
-                    //     .attr("class", "yaxis")
-                    //     .call(d3.axisLeft(y));
+                    var y = d3.scaleLinear()
+                            .domain([0, d3.max(data, function(d) {return +d.Fertility_values; })])
+                            .range([height, 0]);
+                    svg.append("g")
+                        .attr("class", "yaxis")
+                        .call(d3.axisLeft(y));
 
                     // // text label for the y axis
                     // svg.append("text")
@@ -87,17 +81,17 @@
                     //     .text("Date");
 
                     // // Initialize line with group world
-                    // var line = svg
-                    //     .append("g")
-                    //     .append("path")
-                    //     .datum(data.filter(function(d) { return d.CountryName==countryList[0]}))
-                    //     .attr("d", d3.line()
-                    //             .x(function(d) { return x(+d.date) })
-                    //             .y(function(d) { return y(+d.value) })
-                    //         )   
-                    //         .attr("stroke", function(d) {return myColor("valueA") })
-                    //         .style("stroke-width", 4)
-                    //         .style("fill", "none");
+                    var line = svg
+                        .append("g")
+                        .append("path")
+                        .datum(data.filter(function(d) { return d.CountryName==allGroup[0]}))
+                        .attr("d", d3.line()
+                                .x(function(d) { return x(d.year) })
+                                .y(function(d) { return y(+d.value) })
+                            )   
+                            .attr("stroke", function(d) {return myColor("valueA") })
+                            .style("stroke-width", 4)
+                            .style("fill", "none");
                     
                     // // initialize tooltip & add dots with tooltips
                     // svg.selectAll(".circle")
@@ -122,36 +116,36 @@
 
                 
                 
-                    // // A function that updte the chart
-                    // function update(selectedGroup) {
+                    // A function that updte the chart
+                    function update(selectedGroup) {
                         
-                    //     //creates a new data with the selection
-                    //     var dataFilter = data.filter(function(d){return d.countryName==selectedGroup})
+                        //creates a new data with the selection
+                        var dataFilter = data.filter(function(d){return d.countryName==selectedGroup})
 
-                    //     // scale X axis
-                    //     x.domain([d3.min(dataFilter, function(d) {return d.date; }), d3.max(dataFilter, 
-                    //                 function(d) {return d.date; }) ])
-                    //     y.domain([0, d3.max(dataFilter, function(d) {return +d.value; }) ])
+                        // scale X axis
+                        // x.domain([d3.min(dataFilter, function(d) {return d.date; }), d3.max(dataFilter, 
+                        //             function(d) {return d.date; }) ])
+                        // y.domain([0, d3.max(dataFilter, function(d) {return +d.value; }) ])
 
-                    //     //Give these new data to update line
-                    //     line
-                    //         .datum(dataFilter)
-                    //         .transition()
-                    //         .duration(1000)
-                    //         .attr("d", d3.line())
-                    //             .x(function(d) { return x(d.date)}
-                    //             .y(function(d) { return y(+d.value)})
-                    //             )
-                    //         .attr("stroke", function(d) { return myColor(selectedGroup) })
-                    // }
+                        //Give these new data to update line
+                        line
+                            .datum(dataFilter)
+                            .transition()
+                            .duration(1000)
+                            .attr("d", d3.line())
+                                .x(function(d) { return x(d.year)}
+                                .y(function(d) { return y(+d.birthRate)})
+                                )
+                            .attr("stroke", function(d) { return myColor(selectedGroup) })
+                    }
 
-                    // // when button changes, run the updateChart function
-                    // d3.select("#selectButton").on("change", function(d) {
-                    //     //recover the option that has been chosen
-                    //     var selectedOption = d3.select(this).property("value")
-                    //     //run the updateChart function with this selected option
-                    //     update(selectedOption)
-                    // })
+                    // when button changes, run the updateChart function
+                    d3.select("#selectButton").on("change", function(d) {
+                        //recover the option that has been chosen
+                        var selectedOption = d3.select(this).property("value")
+                        //run the updateChart function with this selected option
+                        update(selectedOption)
+                    })
                         
                             
                 })   
