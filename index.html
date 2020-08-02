@@ -27,15 +27,13 @@
                     .attr("transform", "translate("+ margin.left +","+ margin.top +")");
             
             // Read the data
-            var data = d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityRate.csv',
+            d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityRate.csv',
                 // use the dataset
                 function(data) {
-                    console.log("CountyName")
-                    console.log("year")
-                    console.log("birthRate")
                     //list of groups for country
                     var allGroup = d3.map(data, function(d){return (d.CountryName)}).keys()
                     console.log(allGroup)
+                    
 
                    
                     
