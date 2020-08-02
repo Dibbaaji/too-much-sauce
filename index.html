@@ -31,9 +31,12 @@
                 // use the dataset
                 function(data) {
                     console.log("CountyName")
+                    console.log("year")
+                    console.log("birthRate")
                     //list of groups for country
-                    var countryList = d3.map(data, function(d){return (d.CountryName)}).keys()
-                    
+                    var allGroup = d3.map(data, function(d){return (d.CountryName)}).keys()
+                    console.log(allGroup)
+
                    
                     
                 
