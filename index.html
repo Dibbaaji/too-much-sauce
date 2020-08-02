@@ -32,7 +32,7 @@
                 function(d) {
                     return {
                         country : d.CountryName,
-                        year : d3.timeParse("%d-%b-%Y")(d.year),
+                        date : d3.timeParse("%Y")(d.year),
                         rate : +d.birthRate
 
                     }
@@ -43,7 +43,6 @@
                     //list of groups for country
                     var countryList = d3.map(data, function(d){return (d.CountryName)}).keys()
                     console.log(countryList)
-                    console.log(year)
                     console.log(rate)
                     console.log(country)
                     
