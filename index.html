@@ -32,7 +32,7 @@
                 function(d) {
                     return {
                         country : d.CountryName,
-                        year : +d.year,
+                        year : d3.timeParse("%d-%b-%Y")(d.year),
                         rate : +d.birthRate
 
                     }
