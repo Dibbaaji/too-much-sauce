@@ -28,12 +28,26 @@
             
             // Read the data
             d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityRate.csv',
-            
+
+                function(d) {
+                    return {
+                        country : d.CountryName,
+                        year : +d.year,
+                        rate : +d.birthRate
+
+                    }
+
+                },
                 // use the dataset
                 function(data) {
                     //list of groups for country
                     var countryList = d3.map(data, function(d){return (d.CountryName)}).keys()
                     console.log(countryList)
+                    console.log(year)
+                    console.log(rate)
+                    console.log(country)
+                    
+                
 
                     // // option to add a button
                     // d3.select("#selectButton")
