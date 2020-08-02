@@ -27,22 +27,13 @@
                     .attr("transform", "translate("+ margin.left +","+ margin.top +")");
             
             // Read the data
-            d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityRate.csv',
-
-                function(d) {
-                    return {
-                        country : d.CountryName,
-                        date : d3.timeParse("%Y")(d.year),
-                        rate : +d.birthRate
-
-                    }
-
-                },
+            var data = d3.csv('https://raw.githubusercontent.com/Dibbaaji/too-much-sauce/master/fertilityRate.csv',
                 // use the dataset
                 function(data) {
+                    console.log("CountyName")
                     //list of groups for country
                     var countryList = d3.map(data, function(d){return (d.CountryName)}).keys()
-                    console.log(countryList)
+                    
                    
                     
                 
