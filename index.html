@@ -110,7 +110,7 @@
             var line = svg
               .append('g')
               .append("path")
-                .datum(data.filter(function(d){return d.CountryName==allGroup[10]}))
+                .datum(data.filter(function(d){return d.CountryName==allGroup[0]}))
                 .attr("d", d3.line()
                   .x(function(d) { return x(d.year) })
                   .y(function(d) { return y(d.birthRate) })
@@ -121,7 +121,7 @@
 
              // add the dots with tooltips
             svg.selectAll(".circle")
-                .data(data.filter(function(d){return d.CountryName==allGroup[10]}))
+                .data(data.filter(function(d){return d.CountryName==allGroup[0]}))
             .enter().append("circle")
                 .attr("r", 3)
                 .attr("cx", function(d) { return x(d.year); })
