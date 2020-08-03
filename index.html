@@ -140,26 +140,26 @@
                     .style("opacity", 0);
                 });
 
-            // Features of the annotation
-            const annotations = [
-            {
-                note: {
-                label: "Overall, there is a decline in fertility rates",
-                title: "Fertility Rate Trend"
-                },
-                x: 100,
-                y: 100,
-                dy: 100,
-                dx: 100
-            }
-            ]
+            // // Features of the annotation
+            // const annotations = [
+            // {
+            //     note: {
+            //     label: "Overall, there is a decline in fertility rates",
+            //     title: "Fertility Rate Trend"
+            //     },
+            //     x: 100,
+            //     y: 100,
+            //     dy: 100,
+            //     dx: 100
+            // }
+            // ]
 
-            // Add annotation to the chart
-            const makeAnnotations = d3.annotation()
-            .annotations(annotations)
-            d3.select("svg")
-            .append("g")
-            .call(makeAnnotations)
+            // // Add annotation to the chart
+            // const makeAnnotations = d3.annotation()
+            // .annotations(annotations)
+            // d3.select("svg")
+            // .append("g")
+            // .call(makeAnnotations)
 
 
             // A function that update the chart
