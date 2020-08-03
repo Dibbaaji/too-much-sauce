@@ -49,9 +49,9 @@
                   "translate(" + margin.left + "," + margin.top + ")");
 
         //tooltip
-    var tip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
+        var tip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
         
         //Read the data
@@ -121,35 +121,116 @@
         
     
 
-            // A function that update the chart
-            function update(selectedGroup) {
+            // // A function that update the chart
+            // function update(selectedGroup) {
         
-              // Create new data with the selection?
-              var dataFilter = data.filter(function(d){return d.CountryName==selectedGroup})
+            //   // Create new data with the selection?
+            //   var dataFilter = data.filter(function(d){return d.CountryName==selectedGroup})
         
-              // Give these new data to update line
-              line
-                  .datum(dataFilter)
-                  .transition()
-                  .duration(1000)
-                  .attr("d", d3.line()
-                    .x(function(d) { return x(d.year) })
-                    .y(function(d) { return y(d.birthRate) })
-                  )
-                  .attr("stroke", function(d){ return myColor(selectedGroup) })
-            }
+            //   // Give these new data to update line
+            //   line
+            //       .datum(dataFilter)
+            //       .transition()
+            //       .duration(1000)
+            //       .attr("d", d3.line()
+            //         .x(function(d) { return x(d.year) })
+            //         .y(function(d) { return y(d.birthRate) })
+            //       )
+            //       .attr("stroke", function(d){ return myColor(selectedGroup) })
+            // }
         
             // When the button is changed, run the updateChart function
-            d3.select("#selectButton").on("change", function(d) {
-                // recover the option that has been chosen
-                var selectedOption = d3.select(this).property("value")
-                // run the updateChart function with this selected option
-                update(selectedOption)
-            })
-        
+            // d3.select("#selectButton").on("change", function(d) {
+            //     // recover the option that has been chosen
+            //     var selectedOption = d3.select(this).property("value")
+            //     // run the updateChart function with this selected option
+            //     update(selectedOption)
+            // })
+
+             // add the dots with tooltips
+            svg.selectAll(".circle")
+                .data(data.filter(function(d){return d.CountryName==allGroup[0]}))
+            .enter().append("circle")
+                .attr("r", 3)
+                .attr("cx", function(d) { return x(d.year); })
+                .attr("cy", function(d) { return y(d.birthRate); })
+                .on("mouseover", function(d) {
+                tip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tip.html(formatTime(d.year) + "<br/>" + d.birthRate)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                tip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                });
+
+
+            // A function that update the chart
+            function update(selectedGroup) {
+            // Create new data with the selection?
+                var dataFilter = data.filter(function(d){return d.CountryName==selectedGroup})
+            // Scale X axis    
+                x.domain([ d3.min(dataFilter, function(d) { return d.year; }), d3.max(dataFilter, function(d) { return d.year; })]);
+            // Scale Y axis
+                y.domain([0, d3.max(dataFilter, function(d) { return d.birthRate; })]);
+
+                // Give these new data to update line
+                line
+                    .datum(dataFilter)
+                    .transition()
+                    .duration(1000)
+                    .attr("d", d3.line()
+                        .x(function(d) { return x(d.year) })
+                        .y(function(d) { return y(d.birthRate) })
+                    )
+                    .attr("stroke", function(d){ return myColor(selectedGroup) })
+                //update x axis
+                svg.select('.xaxis')
+                    .transition()
+                    .duration(1000)
+                    .call(d3.axisBottom(x));
+                //update y axis
+                svg.select('.yaxis')
+                    .transition()
+                    .duration(1000)
+                    .call(d3.axisLeft(y));
+
+            // add the dots with tooltips
+            var dot = svg.selectAll("circle")
+                .data(dataFilter);
+            
+            dot.exit().remove();
+
+            dot.enter().append("circle")
+                .attr("r", 3)
+                .merge(dot)
+                .transition()
+                .duration(1000)
+                .attr("cx", function(d) { return x(d.year); })
+                .attr("cy", function(d) { return y(d.birthRate); })
+                .on("mouseover", function(d) {
+                tip.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                tip.html(formatTime(d.year) + "<br/>" + d.birthRate)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                tip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                });
+
+            }
+
+            
         })
-        
-        
+             
         </script>
         </body>
 </html>
