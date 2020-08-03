@@ -149,15 +149,15 @@
                 },
                 x: 100,
                 y: 100,
-                dy: 200,
-                dx: 200
+                dy: 100,
+                dx: 100
             }
             ]
 
             // Add annotation to the chart
             const makeAnnotations = d3.annotation()
             .annotations(annotations)
-            d3.select("line")
+            d3.select("svg")
             .append("g")
             .call(makeAnnotations)
 
