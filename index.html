@@ -130,7 +130,7 @@
                 tip.transition()
                     .duration(200)
                     .style("opacity", .9);
-                tip.html(formatTime(d.year) + "<br/>" + d.birthRate)
+                tip.html(d.year + "<br/>" + d.birthRate)
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
                 })
