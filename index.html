@@ -106,12 +106,33 @@
                     .style("text-anchor", "middle")
                     .text("Fertility Rate, total (births per woman)");
 
+             // Features of the annotation
+             const annotations = [
+            {
+                note: {
+                label: "Here is the annotation label",
+                title: "Annotation title"
+                },
+                x: 100,
+                y: 100,
+                dy: 100,
+                dx: 100
+            }
+            ]
+
+            // Add annotation to the chart
+            const makeAnnotations = d3.annotation()
+            .annotations(annotations)
+            // d3.select("#example1")
+            // .append("g")
+            // .call(makeAnnotations)
+
 
             // Initialize line with first group of the list
             var line = svg
               .append('g')
               .append("path")
-                .datum(data.filter(function(d){return d.CountryName==allGroup[0]["World"]}))
+                .datum(data.filter(function(d){return d.CountryName==allGroup[0]}))
                 .attr("d", d3.line()
                   .x(function(d) { return x(d.year) })
                   .y(function(d) { return y(d.birthRate) })
@@ -119,10 +140,12 @@
                 .attr("stroke", function(d){ return myColor("valueA") })
                 .style("stroke-width", 4)
                 .style("fill", "none")
+                .call(makeAnnotations)
+                
 
              // add the dots with tooltips
             svg.selectAll(".circle")
-                .data(data.filter(function(d){return d.CountryName==allGroup[0]["World"]}))
+                .data(data.filter(function(d){return d.CountryName==allGroup[0]}))
             .enter().append("circle")
                 .attr("r", 3)
                 .attr("cx", function(d) { return x(d.year); })
@@ -140,6 +163,7 @@
                     .duration(500)
                     .style("opacity", 0);
                 });
+
 
             // A function that update the chart
             function update(selectedGroup) {
