@@ -121,7 +121,7 @@
 
              // add the dots with tooltips
             svg.selectAll(".circle")
-                .data(data.filter(function(d){return d.CountryName==allGroup[0]}))
+                .data(data.filter(function(d){return d.CountryName==allGroup["World"]}))
             .enter().append("circle")
                 .attr("r", 3)
                 .attr("cx", function(d) { return x(d.year); })
