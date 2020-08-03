@@ -140,9 +140,7 @@
                 .attr("stroke", function(d){ return myColor("valueA") })
                 .style("stroke-width", 4)
                 .style("fill", "none")
-                .call(makeAnnotations)
                 
-
              // add the dots with tooltips
             svg.selectAll(".circle")
                 .data(data.filter(function(d){return d.CountryName==allGroup[0]}))
@@ -162,7 +160,8 @@
                 tip.transition()
                     .duration(500)
                     .style("opacity", 0);
-                });
+                })
+                .call(makeAnnotations);
 
 
             // A function that update the chart
