@@ -106,27 +106,6 @@
                     .style("text-anchor", "middle")
                     .text("Fertility Rate, total (births per woman)");
 
-             // Features of the annotation
-             const annotations = [
-            {
-                note: {
-                label: "Here is the annotation label",
-                title: "Annotation title"
-                },
-                x: 100,
-                y: 100,
-                dy: 100,
-                dx: 100
-            }
-            ]
-
-            // Add annotation to the chart
-            const makeAnnotations = d3.annotation()
-            .annotations(annotations)
-            // d3.select("#example1")
-            // .append("g")
-            // .call(makeAnnotations)
-
 
             // Initialize line with first group of the list
             var line = svg
@@ -161,7 +140,7 @@
                     .duration(500)
                     .style("opacity", 0);
                 })
-                .call(makeAnnotations);
+              
 
 
             // A function that update the chart
