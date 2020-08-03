@@ -18,7 +18,7 @@
     <script>
 
         // set the dimensions and margins of the graph
-        var margin = {top: 100, right: 30, bottom: 30, left: 100},
+        var margin = {top: 10, right: 30, bottom: 30, left: 60},
             width = 600 - margin.left - margin.right,
             height = 600 - margin.top - margin.bottom;
         
@@ -66,21 +66,22 @@
             svg.append("g")
               .call(d3.axisLeft(y));
 
-            // text label for the y axis
-            svg.append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr("y", 0 - margin.left)
-                    .attr("x", 0 - (height / 2))
-                    .attr("dy", "-0.3em") // dy indicates a shift along the y axis
-                    .style("text-anchor", "midle")
-                    .text("Fertility Rate (per 1000 birth");
-
             // add x label
             svg.append("text")
                 .attr("transform", "translate(" + (width / 2) +" ,"
                                                 + (height + margin.top + 20) + ")")
                 .style("text-anchor", "middle")
-                .text("Date");
+                .text("Date(1960 - 1980)");
+
+            // text label for the y axis
+            svg.append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", 0 - margin.left)
+                    .attr("x", 0 - (height / 2))
+                    .attr("dy", "1em") // dy indicates a shift along the y axis
+                    .style("text-anchor", "midle")
+                    .text("Fertility Rate (per 1000 birth");
+
 
             // Initialize line with first group of the list
             var line = svg
